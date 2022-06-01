@@ -30,6 +30,10 @@ def dead_heat(area_list):
     else: return True
     return False
 
+def play_again():
+    if input(f'{Back.RESET}\n Want to play again?\n (y/n):') == 'y':
+        play()
+
 def play():
     area_list = [i for i in range(1, 10)]
     occupied_squares = []
@@ -59,12 +63,12 @@ def play():
         print_tictactoe(area_list)
         if wins_check(area_list): 
             print(f' {Back.GREEN} {value} wins! ')
+            play_again()
             break
 
         if dead_heat(area_list):
             print(f'{Back.GREEN}Dead heat!')
+            play_again()
+            break
 
 play()
-
-if input(f'{Back.RESET}\n Want to play again?\n (y/n):') == 'y':
-    play()

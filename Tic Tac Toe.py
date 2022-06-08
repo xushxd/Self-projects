@@ -30,28 +30,38 @@ def dead_heat(area_list):
     else: return True
     return False
 
+def play_again():
+    if input(f'{Back.RESET}\n Want to play again?\n y/n:') in ('y', '1'):
+        play()
+
 def play():
     area_list = [i for i in range(1, 10)]
     occupied_squares = []
+    incorrect_input = False
 
     print_tictactoe(area_list) 
     i = 0
     while True:
-        changing_input = input('Input square\'s number (1 to 9)\n')
+        if incorrect_input: changing_input = input()       
+        else: changing_input = input('Input square\'s number (1 to 9)\n')
 
         # checking input strings parametrs
-        if not int(changing_input) in list(range(1, 10)):
-            print(f'{Back.RED}Incorrect input!{Back.RESET}')
+        if not changing_input.isdigit() or \
+           not int(changing_input) in list(range(1, 10)):
+            print(f'{Back.RED} Incorrect input! {Back.RESET}')
+            incorrect_input = True
             continue
 
         # checking if square is occuped
         if changing_input in occupied_squares:
-            print(f'{Back.RED}This square is already occupied!{Back.RESET}')
+            print(f'{Back.RED} This square is already occupied! {Back.RESET}')
+            incorrect_input = True
             continue
 
         if i%2 == 0: value = 'x'
         else: value = 'o'
         i += 1
+        incorrect_input = False
 
         area_list[int(changing_input[0])-1] = value
         occupied_squares.append(changing_input[0]) # occuping square
@@ -59,12 +69,11 @@ def play():
         print_tictactoe(area_list)
         if wins_check(area_list): 
             print(f' {Back.GREEN} {value} wins! ')
+            play_again()
             break
 
         if dead_heat(area_list):
             print(f'{Back.GREEN}Dead heat!')
-
+            play_again()
+            break
 play()
-
-if input(f'{Back.RESET}\n Want to play again?\n (y/n):') == 'y':
-    play()

@@ -5,6 +5,8 @@ use "wsda" for movement,
 "f1" for start over,
 "f2" for change style
 "esc" for exit.
+
+And for better experience you can change terminal font to "Lucida Console" 24
 '''
 import keyboard
 from colorama import init
@@ -13,8 +15,8 @@ from colorama import Fore, Back, Style
 import os
 
 def print_tictactoe(area_list):
-    if style == 1: frames = ('╔═══╦═══╦═══╗', '╠═══╬═══╬═══╣', '╚═══╩═══╩═══╝', '║')
-    else: frames = ('┌───┬───┬───┐', '├───┼───┼───┤', '└───┴───┴───┘', '│')
+    if style == 1: frames = ('┌───┬───┬───┐', '├───┼───┼───┤', '└───┴───┴───┘', '│')
+    else: frames = ('╔═══╦═══╦═══╗', '╠═══╬═══╬═══╣', '╚═══╩═══╩═══╝', '║')
 
     os.system('cls' if os.name == 'nt' else 'clear')
     print(f'\n{Back.LIGHTWHITE_EX}{Fore.BLACK} {frames[0]} \n ', end='')
